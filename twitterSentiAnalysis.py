@@ -13,3 +13,8 @@ print(tweets_df.describe())  #gives statistical summary of the data such as, cou
 print(tweets_df['tweet']) #to access an entire column by selecting it
 tweets_df=tweets_df.drop(['id'],axis=1) # we are selecting the tweets_df data frame and selecting a column named id, and dropping the entire column using axis=1, axis=0 is used to drop an entire row
 print(tweets_df) #checking if the id is dropped
+
+
+# Performing data exploration
+sns.heatmap(tweets_df.isnull(),yticklabels=False,cbar=False,cmap="Blues") #Checking for the prsesnce of ay null elements, in the data set
+plt.show() #printing the graph
