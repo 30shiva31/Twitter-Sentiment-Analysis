@@ -7,4 +7,9 @@ jtplot.style(theme='monokai',context='notebook',ticks=True,grid=False) #setting 
  
 #Loading the data
 tweets_df=pd.read_csv('twitter.csv')
-#print(tweets_df)         OUTPUT
+print(tweets_df)    #     OUTPUT
+print(tweets_df.info())  #summary of information that is in data set
+print(tweets_df.describe())  #gives statistical summary of the data such as, count, mean, sd, min, percentile's, max
+print(tweets_df['tweet']) #to access an entire column by selecting it
+tweets_df=tweets_df.drop(['id'],axis=1) # we are selecting the tweets_df data frame and selecting a column named id, and dropping the entire column using axis=1, axis=0 is used to drop an entire row
+print(tweets_df) #checking if the id is dropped
