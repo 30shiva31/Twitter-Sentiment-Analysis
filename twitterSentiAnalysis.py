@@ -14,7 +14,12 @@ print(tweets_df['tweet']) #to access an entire column by selecting it
 tweets_df=tweets_df.drop(['id'],axis=1) # we are selecting the tweets_df data frame and selecting a column named id, and dropping the entire column using axis=1, axis=0 is used to drop an entire row
 print(tweets_df) #checking if the id is dropped
 
-
 # Performing data exploration
+
 sns.heatmap(tweets_df.isnull(),yticklabels=False,cbar=False,cmap="Blues") #Checking for the prsesnce of ay null elements, in the data set
 plt.show() #printing the graph
+#print(tweets_df.isnull().sum()) # Is used to tell the count of null in the data frame, upper command shows the graph though
+tweets_df.hist(bins=30,figsize=(13,5),color='r') #using histogram from matplotlib it shows 
+plt.show()
+# tweets_df['label'].hist() # This plots the graph on the column label, same us the above command
+# plt.show()
