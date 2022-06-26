@@ -34,3 +34,20 @@ plt.show()
 # finds the length of every tweet and inserts a new column named length beside the tweets respectively
 tweets_df['length'] = tweets_df['tweet'].apply(len)
 print(tweets_df)
+# In this you can see the summary, and you can see the min, max and avg length of the tweets in the data frame
+print(tweets_df.describe())
+# # viewing the tweet of minimum size(size=11 as shown in describe)
+print(tweets_df[tweets_df['length'] == 11]['tweet'])
+
+# Plotting the word cloud
+
+# all the data which has label=0 are kept under a new data frame called positive
+positive = tweets_df[tweets_df['label'] == 0]
+print(positive)
+negative = tweets_df[tweets_df['label'] == 1]
+print(negative)
+sentences = tweets_df['tweet'].tolist()  # putting all the tweets into a list
+print(len(sentences))  # tells us no.of tweets that been into list
+# joining all the elements of the list into a single string with a space in b/w
+sentences_as_one_string = " ".join(sentences)
+print(sentences_as_one_string)
