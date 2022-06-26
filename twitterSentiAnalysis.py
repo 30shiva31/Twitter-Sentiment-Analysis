@@ -53,5 +53,13 @@ print(len(sentences))  # tells us no.of tweets that been into list
 sentences_as_one_string = " ".join(sentences)
 print(sentences_as_one_string)
 plt.figure(figsize=(20, 20))
+# Generating image of the wprd cloud using sentences_as_one_string (All sentences)
 plt.imshow(WordCloud().generate(sentences_as_one_string))
+plt.show()
+
+# Word cloud using only negative tweets
+sentences1 = negative['tweet'].tolist()
+sentences_as_one_string1 = " ".join(sentences1)
+plt.figure(figsize=(15, 15))
+plt.imshow(WordCloud().generate(sentences_as_one_string1))
 plt.show()
