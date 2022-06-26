@@ -1,3 +1,6 @@
+from nltk.corpus import stopwords  # natural language tool kit
+import nltk
+import string
 from wordcloud import WordCloud  # importing wordcloud
 import pandas as pd  # It is used to work on data frames(excel sheets)
 import numpy as np  # Used for numerical analysis
@@ -63,3 +66,28 @@ sentences_as_one_string1 = " ".join(sentences1)
 plt.figure(figsize=(15, 15))
 plt.imshow(WordCloud().generate(sentences_as_one_string1))
 plt.show()
+
+# Performing data cleaning
+
+# Removing all the punctuations
+
+# printing all the punctuations available in the grammar
+print(string.punctuation)
+Test = '$I love AI and machine learning!!'
+# list comprehension
+Test_punc_removed = [char for char in Test if char not in string.punctuation]
+# joining the elements of the list
+Test_punc_removed_join = ''.join(Test_punc_removed)
+print(Test_punc_removed_join)
+
+# Removing all the stop words(these are the common words, that doesnt add much value for analysis)
+nltk.download('stopwords')
+print(stopwords.words('english'))
+
+Test_punc_removed_join = 'I enjoy coding, programming and Artificial intelligence'
+Test_punc_removed_join_clean = [word for word in Test_punc_removed_join.split(
+) if word.lower() not in stopwords.words('english')]  # list comprehension
+print(Test_punc_removed_join_clean)  # only important words are left
+
+
+# Performing count vectorization(Tokenization)
