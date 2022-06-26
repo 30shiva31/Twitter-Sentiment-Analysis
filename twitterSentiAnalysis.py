@@ -1,3 +1,4 @@
+from wordcloud import WordCloud  # importing wordcloud
 import pandas as pd  # It is used to work on data frames(excel sheets)
 import numpy as np  # Used for numerical analysis
 import seaborn as sns  # Used for advance visualization
@@ -51,3 +52,6 @@ print(len(sentences))  # tells us no.of tweets that been into list
 # joining all the elements of the list into a single string with a space in b/w
 sentences_as_one_string = " ".join(sentences)
 print(sentences_as_one_string)
+plt.figure(figsize=(20, 20))
+plt.imshow(WordCloud().generate(sentences_as_one_string))
+plt.show()
