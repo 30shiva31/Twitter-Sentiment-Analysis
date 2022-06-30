@@ -1,3 +1,4 @@
+from sklearn.feature_extraction.text import CountVectorizer
 from nltk.corpus import stopwords  # natural language tool kit
 import nltk
 import string
@@ -91,3 +92,41 @@ print(Test_punc_removed_join_clean)  # only important words are left
 
 
 # Performing count vectorization(Tokenization)
+
+sample_data = ['This is the first paper.', 'This document is the second paper.',
+               'And this is the third one.', 'Is this the first paper?']
+vectorizer = CountVectorizer()
+x = vectorizer.fit_transform(sample_data)
+print(vectorizer.get_feature_names())
+print(x.toarray())
+
+# practise opp
+mini_challenge = ['Hello World',
+                  'Hello Hello World', 'Hello World world world']
+vectorizer_challenge = CountVectorizer()
+x_challenge = vectorizer_challenge.fit_transform(mini_challenge)
+print(x_challenge.toarray())
+
+# Creating a pipeline to remove punctuations, stopwords and perform count vectorization
+
+
+def message_cleaning(message):
+    test_punc_removed = [
+        char for char in message if char not in string.punctuation]
+    test_punc_removed_join = ''.join(test_punc_removed)
+    test_punc_removed_join_clean = [word for word in test_punc_removed_join.split(
+    ) if word.lower() not in stopwords.words('english')]
+    return test_punc_removed_join_clean
+
+
+tweets_df_clean = tweets_df['tweet'].apply(message_cleaning)
+print(tweets_df['tweet'][5])  # uncleaned tweet
+print(tweets_df_clean[5])  # cleaned data
+
+vectorizer = CountVectorizer(analyzer=message_cleaning, dtype=np.uint8)
+tweets_countvectorizer = vectorizer.fit_transform(tweets_df['tweet'])
+print(vectorizer.get_feature_names())
+print(tweets_countvectorizer.toarray())
+print(tweets_countvectorizer.shape)
+x = pd.DataFrame(tweets_countvectorizer.toarray())
+print(x)
