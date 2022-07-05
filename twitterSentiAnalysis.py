@@ -1,3 +1,6 @@
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from nltk.corpus import stopwords  # natural language tool kit
 import nltk
@@ -130,3 +133,16 @@ print(tweets_countvectorizer.toarray())
 print(tweets_countvectorizer.shape)
 x = pd.DataFrame(tweets_countvectorizer.toarray())
 print(x)
+
+# Trainand evaluate a naive bayes classifier model
+
+print(x.shape)
+y = tweets_df['label']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+NB_classifier = MultinomialNB()
+NB_classifier.fit(x_train, y_train)
+y_predict_test = NB_classifier.predict(x_test)
+cm = confusion_matrix(y_test, y_predict_test)
+sns.heatmap(cm, annot=True)
+plt.show()
+print(classification_report(y_test, y_predict_test))
