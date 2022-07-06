@@ -44,16 +44,9 @@ tweets_df['length'] = tweets_df['tweet'].apply(len)
 print(tweets_df)
 # In this you can see the summary, and you can see the min, max and avg length of the tweets in the data frame
 print(tweets_df.describe())
-# # viewing the tweet of minimum size(size=11 as shown in describe)
-print(tweets_df[tweets_df['length'] == 11]['tweet'])
 
 # Plotting the word cloud
 
-# all the data which has label=0 are kept under a new data frame called positive
-positive = tweets_df[tweets_df['label'] == 0]
-print(positive)
-negative = tweets_df[tweets_df['label'] == 1]
-print(negative)
 sentences = tweets_df['tweet'].tolist()  # putting all the tweets into a list
 print(len(sentences))  # tells us no.of tweets that been into list
 # joining all the elements of the list into a single string with a space in b/w
@@ -64,53 +57,7 @@ plt.figure(figsize=(20, 20))
 plt.imshow(WordCloud().generate(sentences_as_one_string))
 plt.show()
 
-# Word cloud using only negative tweets
-sentences1 = negative['tweet'].tolist()
-sentences_as_one_string1 = " ".join(sentences1)
-plt.figure(figsize=(15, 15))
-plt.imshow(WordCloud().generate(sentences_as_one_string1))
-plt.show()
-
-# Performing data cleaning
-
-# Removing all the punctuations
-
-# printing all the punctuations available in the grammar
-print(string.punctuation)
-Test = '$I love AI and machine learning!!'
-# list comprehension
-Test_punc_removed = [char for char in Test if char not in string.punctuation]
-# joining the elements of the list
-Test_punc_removed_join = ''.join(Test_punc_removed)
-print(Test_punc_removed_join)
-
-# Removing all the stop words(these are the common words, that doesnt add much value for analysis)
 nltk.download('stopwords')
-print(stopwords.words('english'))
-
-Test_punc_removed_join = 'I enjoy coding, programming and Artificial intelligence'
-Test_punc_removed_join_clean = [word for word in Test_punc_removed_join.split(
-) if word.lower() not in stopwords.words('english')]  # list comprehension
-print(Test_punc_removed_join_clean)  # only important words are left
-
-
-# Performing count vectorization(Tokenization)
-
-sample_data = ['This is the first paper.', 'This document is the second paper.',
-               'And this is the third one.', 'Is this the first paper?']
-vectorizer = CountVectorizer()
-x = vectorizer.fit_transform(sample_data)
-print(vectorizer.get_feature_names())
-print(x.toarray())
-
-# practise opp
-mini_challenge = ['Hello World',
-                  'Hello Hello World', 'Hello World world world']
-vectorizer_challenge = CountVectorizer()
-x_challenge = vectorizer_challenge.fit_transform(mini_challenge)
-print(x_challenge.toarray())
-
-# Creating a pipeline to remove punctuations, stopwords and perform count vectorization
 
 
 def message_cleaning(message):
@@ -142,6 +89,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 NB_classifier = MultinomialNB()
 NB_classifier.fit(x_train, y_train)
 y_predict_test = NB_classifier.predict(x_test)
+print(y_predict_test)
 cm = confusion_matrix(y_test, y_predict_test)
 sns.heatmap(cm, annot=True)
 plt.show()
